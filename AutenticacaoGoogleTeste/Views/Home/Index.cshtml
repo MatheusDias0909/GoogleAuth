@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <html>
+    <body>
+
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <div id="g_id_onload"            
+             data-client_id="200961925085-r509midp7nhcae92tesa56voc1f8uokm.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="large"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+        <script>
+            function handleCredentialResponse(response) {
+            
+                const responsePayload = jwt_decode(response.credential);
+                
+                var userEmail = responsePayload.email;
+                var verifiedUser = responsePayload.email_verified;
+                var userName = responsePayload.name;
+                console.log(responsePayload);
+                console.log(userEmail);
+                console.log(verifiedUser);
+                console.log(userName);
+
+
+                let _url = `@Url.Action("testEmail",
+                 "Home")/${userEmail}/${verifiedUser}/${userName}`;
+
+                
+            }
+
+            
+        </script>
+
+    </body>
+</html>
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
